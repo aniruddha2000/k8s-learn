@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-runtime-sdk
+  namespace: runtimesdk
+spec:
+  selector:
+    matchLabels:
+      app: test-runtime-sdk
+  template:
+    metadata:
+      labels:
+        app: test-runtime-sdk
+    spec:
+      serviceAccountName: manager
+      containers:
+        - name: test-runtime-sdk
+          image: aniruddhabasak/runtime-sdk:0.0.5
+          imagePullPolicy: Always
+          args:
+            - --webhook-cert-dir=/var/run/webhook/serving-cert/
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 9443
+          volumeMounts:
+            - mountPath: /var/run/webhook/serving-cert
+              name: serving-cert
+      volumes:
+        - name: serving-cert
+          secret:
+            secretName: test-runtime-sdk-svc-cert
