@@ -1,7 +1,9 @@
 FROM golang:alpine3.17 as builder
 WORKDIR /src
 COPY . .
-RUN go build -o runtime-sdk
+RUN --mount=type=cache,target=/root/.cache/go-build \
+    --mount=type=cache,target=/go/pkg/mod \
+    go build -o runtime-sdk
 
 FROM alpine
 WORKDIR /app
