@@ -321,7 +321,7 @@ spec:
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: capi-quickstart
+  name: test-workload-cluster
   namespace: default
 spec:
   clusterNetwork:
@@ -347,10 +347,10 @@ spec:
     - name: podSecurityStandard
       value:
         audit: restricted
-        enabled: false
+        enabled: true
         enforce: baseline
         warn: restricted
-    version: v1.26.3
+    version: v1.27.1
     workers:
       machineDeployments:
       - class: default-worker

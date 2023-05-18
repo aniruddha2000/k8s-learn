@@ -12,10 +12,12 @@ spec:
       labels:
         app: test-runtime-sdk
     spec:
+      serviceAccountName: test-runtime-sdk-sa
       containers:
         - name: test-runtime-sdk
-          image: aniruddhabasak/runtime-sdk:0.0.9
+          image: aniruddhabasak/runtime-sdk:0.1.1
           imagePullPolicy: Always
+
           args:
             - --webhook-cert-dir=/var/run/webhook/serving-cert/
           resources:
