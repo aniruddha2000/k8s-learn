@@ -115,9 +115,9 @@ func main() {
 	}
 
 	if err := webhookServer.AddExtensionHandler(server.ExtensionHandler{
-		Hook:        runtimehooksv1.BeforeClusterCreate,
+		Hook:        runtimehooksv1.AfterControlPlaneInitialized,
 		Name:        "before-cluster-create",
-		HandlerFunc: lifecycleExtensionHandlers.DoBeforeClusterCreate,
+		HandlerFunc: lifecycleExtensionHandlers.DoAfterControlPlaneInitialized,
 	}); err != nil {
 		setupLog.Error(err, "error adding handler")
 		os.Exit(1)

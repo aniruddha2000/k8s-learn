@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/spf13/pflag v1.0.5
+	k8s.io/apimachinery v0.27.1
 	k8s.io/component-base v0.27.1
 	k8s.io/klog/v2 v2.100.1
 	sigs.k8s.io/cluster-api v1.4.2
@@ -59,7 +60,6 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/api v0.27.1 // indirect
 	k8s.io/apiextensions-apiserver v0.26.1 // indirect
-	k8s.io/apimachinery v0.27.1 // indirect
 	k8s.io/client-go v0.27.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20230308215209-15aac26d736a // indirect
 	k8s.io/utils v0.0.0-20230209194617-a36077c30491 // indirect
