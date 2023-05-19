@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-runtime-sdk
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/k8s-staging-test-runtime-sdk/test-runtime-sdk-extension-config:main
+          name: test-runtime-sdk
