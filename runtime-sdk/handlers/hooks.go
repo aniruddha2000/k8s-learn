@@ -43,17 +43,21 @@ func (e *ExtensionHandler) DoAfterControlPlaneInitialized(ctx context.Context, r
 	// Your implementation
 	ok, err := e.checkConfigMap(ctx, &request.Cluster)
 	if !ok {
+		log.Info("not ok")
 		if err != nil {
+			log.Info("with error")
 			response.Status = runtimehooksv1.ResponseStatusFailure
 			response.Message = err.Error()
 			return
 		}
+		log.Info("without error")
 		if err := e.createConfigMap(ctx, &request.Cluster, runtimehooksv1.AfterControlPlaneInitialized, request.GetSettings(), response); err != nil {
 			response.Status = runtimehooksv1.ResponseStatusFailure
 			response.Message = err.Error()
 			return
 		}
 	}
+	log.Info("everything is ok")
 }
 
 func (e *ExtensionHandler) checkConfigMap(ctx context.Context, cluster *clusterv1.Cluster) (bool, error) {
@@ -68,8 +72,10 @@ func (e *ExtensionHandler) checkConfigMap(ctx context.Context, cluster *clusterv
 			log.Info("ConfigMap not found")
 			return false, nil
 		}
+		log.Error(err, "ConfigMap not found with an error")
 		return false, errors.Wrapf(err, "failed to read the ConfigMap %s", klog.KRef(cluster.Namespace, configMapName))
 	}
+	log.Info("ConfigMap found")
 	return true, nil
 }
 
@@ -80,8 +86,10 @@ func (e *ExtensionHandler) createConfigMap(ctx context.Context, cluster *cluster
 	configMapName := fmt.Sprintf("%s-test-extension-hookresponse", cluster.Name)
 	configMap := e.getConfigMap(cluster)
 	if err := e.client.Create(ctx, configMap); err != nil {
+		log.Error(err, "creating config map")
 		return errors.Wrapf(err, "failed to create the ConfigMap %s", klog.KRef(cluster.Namespace, configMapName))
 	}
+	log.Info("configmap created successfully")
 	return nil
 }
 
