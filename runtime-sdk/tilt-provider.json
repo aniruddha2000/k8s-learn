@@ -1,0 +1,19 @@
+{
+  "name": "test-runtime-sdk",
+  "config": {
+    "image": "gcr.io/k8s-staging-test-runtime-sdk/test-runtime-sdk-extension-config",
+    "live_reload_deps": [
+      "main.go",
+      "go.mod",
+      "go.sum",
+      "handlers"
+    ],
+    "label": "test-runtime-sdk",
+    "additional_resources": [
+      "config/tilt/extensionconfig.yaml"
+    ],
+    "resource_deps": [
+      "capi_controller"
+    ]
+  }
+}

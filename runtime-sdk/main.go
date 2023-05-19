@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/aniruddha2000/runtime-sdk/handler"
+	handler "github.com/aniruddha2000/runtime-sdk/handlers"
 	"github.com/spf13/pflag"
 	cliflag "k8s.io/component-base/cli/flag"
 	"k8s.io/component-base/logs"

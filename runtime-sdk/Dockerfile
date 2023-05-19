@@ -1,11 +1,14 @@
-FROM golang:alpine3.17 as builder
+######### Build #########
+FROM golang:alpine3.17 AS builder
 WORKDIR /src
 COPY . .
 RUN --mount=type=cache,target=/root/.cache/go-build \
     --mount=type=cache,target=/go/pkg/mod \
-    go build -o runtime-sdk
+    go build -o manager
 
+######### Run #########
 FROM alpine
-WORKDIR /app
-COPY --from=builder /src/runtime-sdk /app/runtime-sdk
-ENTRYPOINT ["/app/runtime-sdk"]
+WORKDIR /
+COPY --from=builder /src/manager .
+USER 65532
+ENTRYPOINT ["/manager"]

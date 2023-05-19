@@ -1,0 +1,18 @@
+namespace: runtimesdk
+
+namePrefix: test-extension-
+
+commonLabels:
+  cluster.x-k8s.io/provider: "test-runtime-sdk"
+
+bases:
+  - ../certmanager
+
+resources:
+  - namespace.yaml
+  - deployment.yaml
+  - service.yaml
+  - sa-roles.yaml
+
+configurations:
+  - kustomizeconfig.yaml

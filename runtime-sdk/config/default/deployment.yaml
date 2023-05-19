@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-runtime-sdk
+  # namespace: runtimesdk
+spec:
+  selector:
+    matchLabels:
+      app: test-runtime-sdk
+  template:
+    metadata:
+      labels:
+        app: test-runtime-sdk
+    spec:
+      serviceAccountName: test-runtime-sdk-sa
+      containers:
+        - name: manager
+          command:
+            - /manager
+          image: gcr.io/k8s-staging-test-runtime-sdk/test-runtime-sdk-extension-config:latest
+          ports:
+            - containerPort: 9443
+          args:
+            - --webhook-cert-dir=/var/run/webhook/serving-cert/
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            runAsUser: 65532
+            runAsGroup: 65532
+            resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          volumeMounts:
+            - mountPath: /var/run/webhook/serving-cert
+              name: serving-cert
+      terminationGracePeriodSeconds: 10
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      volumes:
+        - name: serving-cert
+          secret:
+            secretName: test-runtime-sdk-svc-cert
