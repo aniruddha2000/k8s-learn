@@ -1,14 +1,14 @@
 {
-  "name": "test-runtime-sdk",
+  "name": "runtimesdk",
   "config": {
-    "image": "gcr.io/k8s-staging-test-runtime-sdk/test-runtime-sdk-extension-config",
+    "image": "gcr.io/k8s-staging-extension-config/test-runtime-sdk",
     "live_reload_deps": [
       "main.go",
       "go.mod",
       "go.sum",
       "handlers"
     ],
-    "label": "test-runtime-sdk",
+    "label": "extensionconfig",
     "additional_resources": [
       "config/tilt/extensionconfig.yaml"
     ],

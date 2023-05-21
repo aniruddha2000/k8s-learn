@@ -6,5 +6,5 @@ spec:
   template:
     spec:
       containers:
-        - image: gcr.io/k8s-staging-test-runtime-sdk/test-runtime-sdk-extension-config:main
+        - image: gcr.io/k8s-staging-extension-config/test-runtime-sdk:main
           name: test-runtime-sdk
