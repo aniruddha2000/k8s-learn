@@ -17,7 +17,7 @@ spec:
         - command:
             - /manager
           image: controller:latest
-          name: test-runtime-sdk
+          name: manager
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
