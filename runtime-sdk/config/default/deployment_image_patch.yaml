@@ -7,4 +7,4 @@ spec:
     spec:
       containers:
         - image: gcr.io/k8s-staging-extension-config/test-runtime-sdk:main
-          name: test-runtime-sdk
+          name: manager
